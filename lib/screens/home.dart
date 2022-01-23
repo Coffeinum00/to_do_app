@@ -33,15 +33,10 @@ class HomePage extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              width: MediaQuery.of(context).size.width - 50,
-              height: 120.0,
-              color: Colors.lightBlue[200],
-              child: MyTextWidget(
-                color: Colors.lightBlue[500],
-                text: "input",
-                size: 25.00,
-              ),
-            ),
+                width: MediaQuery.of(context).size.width - 20,
+                height: 120.0,
+                color: Colors.lightBlue[200],
+                child: TextFormField()),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -59,23 +54,27 @@ class HomePage extends StatelessWidget {
 
   Widget mytask(index) {
     bool ischecked = false;
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Checkbox(value: ischecked, onChanged: (ischecked) {}),
-            MyTextWidget(
-                text: myTasks[index].toString(),
-                color: Colors.blueGrey[200],
-                size: 25.0),
-          ],
-        ),
-        Divider(
-          thickness: 3,
-          color: Colors.lightBlue[100],
-        )
-      ],
+    return Dismissible(
+      key: UniqueKey(),
+      // onDismissed: () {},
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Checkbox(value: ischecked, onChanged: (ischecked) {}),
+              MyTextWidget(
+                  text: myTasks[index].toString(),
+                  color: Colors.blueGrey[200],
+                  size: 25.0),
+            ],
+          ),
+          Divider(
+            thickness: 3,
+            color: Colors.lightBlue[100],
+          )
+        ],
+      ),
     );
   }
 }
