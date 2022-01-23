@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/widgets/text_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
-  List<String> myTasks = [
-    '1',
-    '2',
-    '3',
-    '4',
-  ];
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Map> myTasks = [];
+
+  Map<String, dynamic> myFirstMap = {
+    'checkbox': false,
+    'text': 'test',
+  };
+  @override
+  void initState() {
+    super.initState();
+    myTasks.add(myFirstMap);
+    // przesuwanie całej linijki kodu to alt+strzałkaGóra/Doł ;)
+  }
+
   TextEditingController controller = TextEditingController();
+
+  String myInput = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +36,7 @@ class HomePage extends StatelessWidget {
           color: Colors.lightBlue[900],
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              print('eloszka');
-            },
-            icon: Icon(Icons.add),
-          )
+          mybuttonicon(),
         ],
       ),
       body: ListView(
@@ -37,18 +47,18 @@ class HomePage extends StatelessWidget {
               // height: 60.0,
               color: Colors.lightBlue[200],
               child: TextFormField(
-                onChanged: (string) {
-                  print(string);
-                },
+                // onChanged: (string) {
+                //   setState(() {
+                //     myInput = string;
+                //     myTasks.add(myInput);
+                //   });
+                // },
                 controller: controller,
                 minLines: 1,
                 maxLines: 5,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
-                  prefixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.add),
-                  ),
+                  prefixIcon: mybuttonicon(),
                   border: InputBorder.none,
                 ),
               ),
@@ -57,6 +67,7 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: myTasks.length,
                 itemBuilder: (context, index) {
@@ -65,6 +76,18 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  IconButton mybuttonicon() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          // myTasks.add(controller.text);
+          controller.clear();
+        });
+      },
+      icon: Icon(Icons.add),
     );
   }
 
@@ -80,7 +103,7 @@ class HomePage extends StatelessWidget {
             children: [
               Checkbox(value: ischecked, onChanged: (ischecked) {}),
               MyTextWidget(
-                  text: myTasks[index].toString(),
+                  text: myTasks[index].values.elementAt(1).toString(),
                   color: Colors.blueGrey[200],
                   size: 25.0),
             ],
