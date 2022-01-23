@@ -43,14 +43,39 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: myTasks.length,
-              itemBuilder: (context, index) {
-                return Text(index.toString());
-              })
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: myTasks.length,
+                itemBuilder: (context, index) {
+                  return mytask(index);
+                }),
+          )
         ],
       ),
+    );
+  }
+
+  Widget mytask(index) {
+    bool ischecked = false;
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Checkbox(value: ischecked, onChanged: (ischecked) {}),
+            MyTextWidget(
+                text: myTasks[index].toString(),
+                color: Colors.blueGrey[200],
+                size: 25.0),
+          ],
+        ),
+        Divider(
+          thickness: 3,
+          color: Colors.lightBlue[100],
+        )
+      ],
     );
   }
 }
