@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
     '3',
     '4',
   ];
-
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +33,26 @@ class HomePage extends StatelessWidget {
         children: [
           Center(
             child: Container(
-                width: MediaQuery.of(context).size.width - 20,
-                height: 120.0,
-                color: Colors.lightBlue[200],
-                child: TextFormField()),
+              width: MediaQuery.of(context).size.width - 20,
+              // height: 60.0,
+              color: Colors.lightBlue[200],
+              child: TextFormField(
+                onChanged: (string) {
+                  print(string);
+                },
+                controller: controller,
+                minLines: 1,
+                maxLines: 5,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  prefixIcon: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.add),
+                  ),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
