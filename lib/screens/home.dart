@@ -11,14 +11,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Map> myTasks = [];
 
-  Map<String, dynamic> myFirstMap = {
-    'checkbox': false,
-    'text': 'test',
-  };
   @override
   void initState() {
     super.initState();
-    myTasks.add(myFirstMap);
     // przesuwanie całej linijki kodu to alt+strzałkaGóra/Doł ;)
   }
 
@@ -98,7 +93,10 @@ class _HomePageState extends State<HomePage> {
     // bool ischecked = false;
     return Dismissible(
       key: UniqueKey(),
-      // onDismissed: () {},
+      onDismissed: (direction) {
+        if (direction == DismissDirection.startToEnd ||
+            direction == DismissDirection.endToStart) myTasks.removeAt(index);
+      },
       child: Column(
         children: [
           Row(
@@ -109,7 +107,6 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (ischecked) {
                     setState(() {
                       bool czekbox = myTasks[index].values.elementAt(0);
-
                       myTasks[index]['checkbox'] = !czekbox;
                     });
                   }),
