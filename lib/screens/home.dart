@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/widgets/text_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  List<String> myTasks = [
+    '1',
+    '2',
+    '3',
+    '4',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +17,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: MyTextWidget(
-          text: 'To do app',
-          color: Colors.indigo[900],
+          text: 'To do',
+          color: Colors.lightBlue[900],
         ),
         actions: [
           IconButton(
@@ -23,7 +30,26 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: ListView(
-        children: [],
+        children: [
+          Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width - 50,
+              height: 120.0,
+              color: Colors.lightBlue[200],
+              child: MyTextWidget(
+                color: Colors.lightBlue[500],
+                text: "input",
+                size: 25.00,
+              ),
+            ),
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: myTasks.length,
+              itemBuilder: (context, index) {
+                return Text(index.toString());
+              })
+        ],
       ),
     );
   }

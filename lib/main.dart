@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
+      // powyższe sprawia, że znika w komórce wstążka ''debug''
       home: HomePage(),
     );
   }
