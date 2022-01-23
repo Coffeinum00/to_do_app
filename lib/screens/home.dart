@@ -6,12 +6,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
-    appBar:
-    AppBar(
-      centerTitle: true,
-      title: MyTextWidget(
-        text: 'To do app',
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: MyTextWidget(
+          text: 'To do app',
+          color: Colors.indigo[900],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              print('eloszka');
+            },
+            icon: Icon(Icons.add),
+          )
+        ],
+      ),
+      body: ListView(
+        children: [],
       ),
     );
   }
