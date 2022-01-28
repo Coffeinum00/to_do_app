@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/widgets/text_widget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,9 +20,12 @@ class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
 
   String myInput = '';
+  bool? checkbox;
 
   @override
   Widget build(BuildContext context) {
+    myTasks.sort(
+        (a, b) => a['checkbox'].toString().compareTo(b['checkbox'].toString()));
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -62,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: myTasks.length,
                 itemBuilder: (context, index) {
@@ -85,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           controller.clear();
         });
       },
-      icon: Icon(Icons.add),
+      icon: const Icon(Icons.add),
     );
   }
 
@@ -111,9 +114,11 @@ class _HomePageState extends State<HomePage> {
                     });
                   }),
               MyTextWidget(
-                  text: myTasks[index].values.elementAt(1).toString(),
-                  color: Colors.blueGrey[200],
-                  size: 25.0),
+                text: myTasks[index].values.elementAt(1).toString(),
+                color: Colors.blueGrey[200],
+                size: 25.0,
+                checkbox: myTasks[index].values.elementAt(0),
+              ),
             ],
           ),
           Divider(
@@ -125,3 +130,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+// w domu:
+// rzeczy z checkboxem true  [sortowanie listy] spadają na dół listy+przekreśla się tekst
